@@ -1,0 +1,18 @@
+.share {
+    &__social-links {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    &__social-link {
+        margin-right: 15px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__link {
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,25 @@
+.icon {
+    &--size_s {
+        font-size: 18px;
+    }
+
+    &--size_m {
+        font-size: 24px;
+    }
+    
+    &--size_l {
+        font-size: 32px;
+    }
+}
+
+.mdc-button {
+    .icon {
+        font-size: 18px;
+    }
+}
+
+.mdc-icon-button {
+    .icon {
+        font-size: inherit;
+    }
+}

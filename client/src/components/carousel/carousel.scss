@@ -1,0 +1,24 @@
+@import "../../styles/bootstrap/index";
+@import "bootstrap/scss/_carousel.scss";
+
+.carousel-indicators {
+    z-index: 7;
+}
+.carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.carousel-control-prev,
+.carousel-control-next {
+    &:hover {
+        cursor: move;
+    }
+}
+
+.carousel_dialog > {
+    .carousel-control-prev,
+    .carousel-control-next {
+        background: rgba(0,0,0,0.3);
+    }
+}

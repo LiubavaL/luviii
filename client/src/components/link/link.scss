@@ -1,0 +1,69 @@
+@use "../../styles/general/variables";
+
+.link {
+    $link: &;
+    text-decoration: none;
+
+    &--type_footer-nav {
+        font-family: variables.$primary-font-family;
+        font-weight: 400;
+        font-size: 18px;
+        color: variables.$surface-color;
+
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+            outline: none;
+        }
+    }
+
+    &--type_header-nav {
+        display: inline-flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        font-family: variables.$primary-font-family;
+        font-weight: 400;
+        color: variables.$base-color;
+        font-size: 16px;
+        text-transform: uppercase;
+
+        &#{$link}--accentuated {
+            color: variables.$primary-color;
+        }
+
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+            outline: none;
+        }
+    }
+    
+    &--type_action {
+        font-family: variables.$primary-font-family;
+        font-weight: 400;
+        font-size: 18px;
+        color: #989898;
+
+        &#{$link}--accentuated {
+            color: variables.$primary-color;
+        }
+
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+            outline: none;
+        }
+    }
+}
+
+@media (max-width: 1024px){
+    .link {
+        &--type_header-nav {
+            &:hover,
+            &:focus {
+                text-decoration: none;
+            }
+        }
+    }
+}

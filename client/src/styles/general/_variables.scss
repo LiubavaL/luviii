@@ -1,0 +1,42 @@
+$primary-color: #ff4081;
+$secondary-color: #5327cf;
+$error-color: #d0021b;
+$surface-color: #ffffff;
+$base-color: #0f0f0f;
+
+
+// $surface: #ffffff;
+// $background: #ffffff;
+// $error: #b00020;
+
+
+// “On-” colors define how text, icons, and strokes are colored in relation to the surface on which they appear. If you are updating these manually, be sure to consider accessible color contrast for the value pairs.
+
+// $on-primary: #ffffff;
+// $on-secondary: #ffffff;
+// $on-error: #ffffff;
+// $on-surface: #000000;
+
+$border-radius-s: 4px;
+$border-radius-m: 4px;
+$border-radius-l: 0px;
+
+// $box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+$box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500&family=Open+Sans:wght@300;400;600;700&family=Roboto:wght@300;400;700&family=PT+Sans:wght@700&display=swap');
+
+$primary-font-family: 'Open Sans', sans-serif;
+
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+$seconary-font-family: 'Roboto', sans-serif;
+
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+$chapter-index-font-family: 'Barlow Condensed', sans-serif;
+
+$logo-font-family: 'PT Sans', sans-serif;
+
+//icon sizes
+$icon-size-s: 18px;
+$icon-size-m: 24px;
+$icon-size-l: 32px;

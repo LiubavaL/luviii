@@ -1,0 +1,20 @@
+//импорт переменных темы
+@import "../../styles/my-theme";
+// @import "~@material/button/dist/mdc.button.css";
+@import "@material/button/mdc-button";
+
+.mdc-button {
+    font-size: 16px;
+    padding: 8px 10px;
+    height: auto;
+    text-transform: none;
+    // @include mdc-button-height(100px);
+  
+    &--fullwidth {
+        width: 100%;
+    }
+
+    &--outlined {
+        @include mdc-button-outline-color($mdc-theme-primary);
+    }
+}

@@ -1,0 +1,90 @@
+@use "../../../styles/general/variables";
+
+.comic {
+    // background-size: cover;
+    // background-position: center;
+
+    &__cover {
+        height: 625px;
+    }
+
+    &__status {
+        margin-top: 15px;
+    }
+
+    &__body {
+        margin: 40px 25px;
+    }
+    
+    &__description {
+        display: flex;
+    }
+
+    &__actions {
+        flex: 1 0 25%;
+        min-width: 140px;
+        margin-left: 20px;
+    }
+
+    &__start-read {
+        margin-bottom: 8px;
+    }
+
+    &__meta {
+        display: flex;
+        margin-top: 15px;
+    }
+
+    &__genres {
+        margin-right: 15px;
+    }
+
+    &__brief {
+        margin-top: 15px;
+    }
+
+    &__adult-warning {
+        padding: 1px 6px;
+        letter-spacing: 1px;
+        color: variables.$primary-color;
+        border: 1px solid variables.$primary-color;
+    }
+
+    &__separator {
+        width: 1px;
+        margin-right: 20px;
+        overflow: hidden;
+        border-right: 1px solid gray;
+    }
+
+    &__heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__chapters {
+        margin-top: 15px;
+    }
+
+    &__list{
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px){
+    .comic {
+        &__description {
+            display: block;
+        }
+
+        &__actions {
+            margin-left: 0;
+            margin-top: 20px;
+        }
+
+        &__cover {
+            height: 320px;
+        }    
+    }
+}

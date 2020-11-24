@@ -1,0 +1,111 @@
+@use '../../styles/general/variables';
+
+.footer {
+    
+    &__main {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #2e2e2e;
+        padding: 30px 25px 35px;
+    }
+  
+
+    &__social {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 45px;
+        background-color: variables.$surface-color;
+
+        &-title {
+            margin-right: 50px;
+        }
+    }
+
+    &__social-link {
+        display: inline-block;
+        
+        &:not(:last-child) {
+            margin-right: 30px;
+        }
+    }
+
+    &__menu {
+        display: flex;
+        justify-content: center;
+        // padding: 0;
+
+        &-item {
+            // list-style: none;
+
+            &:not(:last-child){
+                margin-right: 30px;
+            }
+        }
+
+        &-link {
+            font-size: 22px;
+            font-family: variables.$seconary-font-family;
+            color: variables.$surface-color;
+            text-decoration: none;
+        }
+    }
+
+    &__copyrights {
+        font-family: variables.$seconary-font-family;
+        font-size: 14px;
+        color: lightgray;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .footer {
+        &__social {
+            flex-direction: column;
+
+            &-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            &-link {
+                margin: 10px;
+
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+            }
+
+            &-title {
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+        }
+
+        &__main {
+            flex-direction: column;
+        }
+       
+        &__menu {
+            flex-direction: column;
+
+
+            &-item {
+                text-align: center;
+
+                &:not(:last-child){
+                    margin-right: 0;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        &__copyrights {
+            font-size: 12px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    }
+}

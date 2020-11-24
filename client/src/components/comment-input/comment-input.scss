@@ -1,0 +1,34 @@
+.comment-input {
+    $commentInput: &;
+
+    display: flex;
+
+    &__body {
+        flex-grow: 1;
+        margin-left: 10px;
+        position: relative;
+    }
+
+    &__actions {
+        display: flex;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding: 0 10px 5px;
+    }
+
+    &__submit {
+        margin-left: auto;
+        display: none;
+    }
+
+    &--focused {
+        #{$commentInput}__submit {
+            display: block;
+        }
+
+        #{$commentInput}__actions {
+            width: 100%;
+        }
+    }
+}

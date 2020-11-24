@@ -1,0 +1,39 @@
+@import "@material/drawer/mdc-drawer";
+
+.mdc-drawer {
+    &__close {
+        text-align: right;
+    } 
+
+    &__search {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    // &__mode {
+    //     width: 100%;
+    // }
+}
+
+@media (max-width: 540px){
+    .mdc-drawer {
+        @include mdc-drawer-width(100%);
+    }
+}
+
+@media (min-width: 768px){
+    // .mdc-drawer {
+    //     &__mode {
+    //         display: none;
+    //     }
+    // }
+}
+
+@media (min-width: 540px){
+    .mdc-drawer {
+        &__close,
+        &__search {
+            display: none;
+        } 
+    }
+}

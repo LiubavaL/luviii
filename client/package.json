@@ -1,0 +1,55 @@
+{
+  "name": "luviiis-ws",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material/button": "^5.1.0",
+    "@material/card": "^5.1.0",
+    "@material/checkbox": "^5.1.0",
+    "@material/dialog": "^5.1.0",
+    "@material/drawer": "^5.1.0",
+    "@material/form-field": "^5.1.0",
+    "@material/icon-button": "^5.1.0",
+    "@material/list": "^5.1.0",
+    "@material/menu": "^5.1.0",
+    "@material/radio": "^5.1.0",
+    "@material/ripple": "^5.1.0",
+    "@material/select": "^5.1.0",
+    "@material/tab": "^5.1.0",
+    "@material/tab-bar": "^5.1.0",
+    "@material/textfield": "^5.1.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "bootstrap": "^4.4.1",
+    "draft-js": "^0.11.6",
+    "react": "^16.13.0",
+    "react-bootstrap": "^1.0.0-beta.17",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "sass": "1.25.0"
+  },
+  "proxy": "http://localhost:5000",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  }
+}

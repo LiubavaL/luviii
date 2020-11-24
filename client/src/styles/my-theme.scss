@@ -1,0 +1,43 @@
+@use "general/variables";
+/* Build a Material theme */
+// To begin customizing your theme, modify these variables. By default each theme starts off with our baseline values, so you can easily swap them out.
+
+/*  Typography */
+// To change your theme's typography, we recommend importing a font from Google Fonts and setting the global font-family https://fonts.google.com
+
+// @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700');
+$mdc-typography-font-family: variables.$primary-font-family;
+
+
+/* Shape */
+// The shapes of small, medium, and large components can be themed by overriding the default values. We recommend using our shape customization tool to help you pick your radius values. https://material.io/design/shape/about-shape.html#shape-customization-tool
+
+$mdc-shape-small-component-radius: variables.$border-radius-s;
+$mdc-shape-medium-component-radius: variables.$border-radius-m;
+$mdc-shape-large-component-radius: variables.$border-radius-l;
+
+
+/* Color */
+// To change your theme's color scheme, replace the existing HEX color values with custom HEX color values. Use our color palette generator to help come up with pairings and check your color contrast. https://material.io/design/color/the-color-system.html#tools-for-picking-colors
+
+// Primary colors ($mdc-theme-primary) map to components such as app bars and buttons, while secondary colors ($mdc-theme-secondary) are used as accents on components such as FABs and selection controls.
+
+$mdc-theme-primary: variables.$primary-color;
+$mdc-theme-secondary: variables.$secondary-color;
+
+
+// Theme background ($mdc-theme-background) appears behind scrollable content. Surface color ($mdc-theme-surface) is mapped to the surface of components such as cards, sheets, and menus. Error color ($mdc-theme-error) is used to indicate an error state for components such as text fields provided with inaccurate input.
+
+$mdc-theme-surface: variables.$surface-color;
+$mdc-theme-background: variables.$surface-color;
+$mdc-theme-error: variables.$error-color;
+
+
+// “On-” colors define how text, icons, and strokes are colored in relation to the surface on which they appear. If you are updating these manually, be sure to consider accessible color contrast for the value pairs.
+
+$mdc-theme-on-primary: variables.$surface-color;
+$mdc-theme-on-secondary: variables.$surface-color;
+$mdc-theme-on-error: variables.$surface-color;
+$mdc-theme-on-surface: variables.$base-color;
+
+// $mdc-typography-button-text-transform: none;

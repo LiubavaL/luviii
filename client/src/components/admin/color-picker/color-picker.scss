@@ -1,0 +1,92 @@
+.color-picker {
+    position: relative;
+
+    &__modal {
+        position: absolute;
+        top: 50px;
+        width: 250px;
+        background-color: #ffffff;
+        box-shadow: 1px 5px 10px #aaa;
+        padding: 20px;
+        z-index: 101;
+
+        &-wrapper {
+            z-index: 10;
+            position: absolute;
+            transition: transform .1s;
+        }
+    }
+
+    &__backdrop {
+        // background: rgba(0, 0, 0, 0.3);
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 100;
+    }
+
+    &__color {
+        position: relative;       
+    }
+
+    &__pointer {
+        border: 2px solid #ffffff;
+        box-shadow: 1px 2px #000000;
+    }
+
+    &__color-result {
+        width: 100%;
+        height: 100%;
+    }
+
+    &__pointer {
+        position: absolute;
+    }
+
+    &__hue,
+    &__alpha {
+        position: relative;
+    }
+
+    &__cross {
+        position: absolute;
+        border: 2px solid white;
+        box-shadow: 0px 0px 1px 2px black;
+        border-radius: 50%;
+    }
+
+    &__dot {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        background-color: #000000;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__handle {
+        position: absolute;
+        top: 0;
+        background-color: #ffffff;
+        border-radius: 50%;
+        border: 1px solid #aaa;
+        transition: left .1s linear;
+    }
+
+    &__rgba,
+    &__hsl {
+        display: flex;
+
+        input{
+            width: calc(100% / 4)
+        }
+    }
+
+    &__color-result {
+        width: 50px;
+        height: 50px;
+    }
+}

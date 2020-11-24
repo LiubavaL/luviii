@@ -1,0 +1,85 @@
+@use "@material/dialog/index.scss" as dialog;
+
+@include dialog.core-styles;
+
+// @import "@material/dialog/mdc-dialog";
+
+
+.mdc-dialog {
+    $dialog: &;
+
+    &__title {
+        padding-top: 30px;
+
+        &:before {
+            content: none;
+        }
+    }
+
+    &__actions {
+        padding-top: 0; 
+        padding-bottom: 25px; 
+    }
+
+    &--fullWidth {
+        #{$dialog}__container,
+        #{$dialog}__surface {
+            width: 100%;
+        }
+    }
+
+    &--type_contact {
+        @include dialog.max-width(400px, dialog.$margin);
+    }
+
+    &--type_post {
+        @include dialog.max-width(1024px, dialog.$margin);
+    }
+}
+
+@media(min-width: 592px){
+    .mdc-dialog {
+        $dialog: &;
+
+        &__surface {
+            // max-width: 1024px;
+            overflow-y: visible;
+        }
+
+        &__close {
+            position: absolute;
+            right: -60px;
+        }
+
+        &__controls {
+            height: 100%;
+        }
+
+        &__actions {
+            justify-content: center;
+        }
+
+        &__control {
+            position: absolute;
+            height: 100%;
+            border: none;
+            background: none;
+            color: white;
+            font-size: 36px;
+
+            svg {
+                fill: rgba(255, 255, 255, 0.81);
+                height: 118px;
+                width: auto;
+            }
+
+            &_left {
+                left: 0;
+            }
+
+            &_right {
+                right: 0;
+            }
+        }
+    }
+}

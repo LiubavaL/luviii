@@ -1,0 +1,50 @@
+.hashtag {
+    color: aqua;
+    font-weight: bold;
+}
+
+.editor {
+    padding: 20px;
+    min-height: 60px;
+    border: 1px solid gray;
+}
+
+.fancyBold {
+    color: red;
+}
+
+.linkStyle {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+
+.emoji-modal {
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    left: 5px;
+    top: 100%;
+    width: 200px;
+    height: 200px;
+    overflow: auto;
+    background-color: white;
+    z-index: 5;
+    padding: 5px;
+
+    &__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 2px;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        font-size: 22px;
+    }
+}
+
+.emoji-control {
+    position: relative;
+    width: 0;
+}

@@ -1,0 +1,30 @@
+.comic-subscribe {
+    display: flex;
+
+    &__caption {
+        margin-bottom: 5px;
+    }
+
+    &__tab-content {
+        padding-top: 15px;
+    }
+
+    &__col:last-child {
+        margin-left: 20px;
+        min-height: 210px;
+        width: 60%;
+    }
+
+    &__title,
+    &__text {
+        text-align: left;
+    }
+
+    &__title {
+        margin-bottom: 20px;
+    }
+
+    &__btn {
+        margin-top: 10px;
+    }
+}

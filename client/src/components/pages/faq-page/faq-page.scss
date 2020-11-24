@@ -1,0 +1,40 @@
+.faq {
+    &__spoiler {
+        margin: 0 30px 10px;
+    }
+
+    &__heading {
+        text-align: center;
+        margin: 45px 30px 15px;
+    }
+
+    &__brief {
+        text-align: center;
+        margin: 10px 30px 20px;
+    }
+
+    &__btn {
+        margin-top: 20px;
+        margin-bottom: 35px;
+        text-align: center;
+    }
+    &__title {
+        margin-top: 35px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px){
+    .faq {
+        &__heading {
+            margin-top: 15px;
+        }
+
+        &__heading,
+        &__brief,
+        &__spoiler {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+}

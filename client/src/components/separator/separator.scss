@@ -1,0 +1,16 @@
+@use '../../styles/general/variables';
+
+.separator {
+    position: relative;
+    border-top: 2px solid lightgray;
+
+    &__label{
+        position: absolute;
+        bottom: 50%;
+        transform: translate(50%, 35%);
+        right: 50%;
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: variables.$surface-color;
+    }
+}

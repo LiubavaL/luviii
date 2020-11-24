@@ -1,0 +1,77 @@
+@use "../../styles/general/variables";
+
+$mdc-typography-styles-headline1: (
+    font-size: 40px,
+    line-height: normal
+);
+$mdc-typography-styles-headline2: (
+    font-size: 36px,
+    line-height: normal,
+);
+$mdc-typography-styles-headline3: (
+    font-size: 30px,
+    line-height: normal,
+);
+$mdc-typography-styles-headline4: (
+    font-size: 26px,
+    line-height: normal,
+);
+$mdc-typography-styles-headline5: (
+    font-size: 24px,
+    line-height: normal,
+);
+$mdc-typography-styles-headline6: (
+    font-size: 20px,
+    line-height: normal,
+    text-overflow: ellipsis
+);
+
+$mdc-typography-styles-caption: (
+    line-height: normal,
+    font-color: #6b6b6b
+);
+
+$mdc-typography-styles-overline: (
+    line-height: normal
+);
+
+@import "@material/typography/mdc-typography";
+
+.mdc-typography {
+    color: variables.$base-color;
+
+    // &--accented {
+    //     color: variables.$primary-color;
+    // }
+    &--theme {
+        &_accent {
+            color: variables.$primary-color;
+        }
+        &_light {
+            color: variables.$surface-color;
+        }
+    }
+
+    &--weight {
+        &_light {
+            font-weight: 300;
+        }
+    }
+
+    &--centered {
+        text-align: center;
+    }
+
+    .icon {
+        font-size: inherit;
+        vertical-align: bottom;
+        margin-right: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    // $mdc-typography-styles-headline1: (
+    //     font-size: 32px,
+    //     line-height: 32px
+    // );
+}

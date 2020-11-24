@@ -1,0 +1,27 @@
+@use "../../../styles/general/variables";
+
+.not-found-page {
+    height: 100%;
+    background: url('/images/space_1.jpg') left top / cover;
+    overflow: hidden;
+
+    &__content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-left: 10%;
+        margin-top: 5%;
+    }
+
+    &__desc {
+        margin-left: 45px;
+    }
+
+    &__link {
+        color: variables.$primary-color;
+    }
+
+    &__code {
+        font-size: 200px;
+    }
+}

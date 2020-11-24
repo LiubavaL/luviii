@@ -1,0 +1,14 @@
+@use "../../styles/general/variables";
+@import "@material/tab-indicator/mdc-tab-indicator";
+
+.mdc-tab-indicator {
+    $indicator: &;
+
+    #{$indicator} &__content--icon {
+        color: variables.$secondary-color;
+    }
+
+    #{$indicator}--active &__content--icon{
+        opacity: 0.2;
+    }
+}

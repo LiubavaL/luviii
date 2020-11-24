@@ -1,0 +1,26 @@
+$card-margin: 10px;
+
+.grid {
+    display: grid;
+    grid-auto-rows: 40px;
+    grid-gap: $card-margin;
+    margin: $card-margin;
+
+    &__item {
+        grid-row-end: span 2;
+    }
+}
+
+@media all and (max-width: 860px){
+    .grid {
+        &__item {
+        }
+    }
+}
+
+@media all and (max-width: 640px){
+    .grid {
+        &__item {
+        }
+    }
+}

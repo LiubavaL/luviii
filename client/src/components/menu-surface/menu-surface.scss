@@ -1,0 +1,7 @@
+@use "@material/menu-surface/mdc-menu-surface";
+
+.mdc-menu-surface {
+    &--fullWidth {
+        width: 100%;
+    }
+}

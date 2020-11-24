@@ -1,0 +1,29 @@
+.chapter-row {
+    margin-left: 20px;
+    margin-top: 10px;
+
+    &__content,
+    &__pages {
+        display: flex;
+    }
+
+    &__pages img {
+        border: 1px solid black;
+        margin-right: 10px;
+    }
+}
+
+
+.row {
+    display: flex;
+    margin-top: 20px;
+}
+
+.legend {
+    margin: 20px;
+    overflow: hidden;
+
+    &--volume {
+        margin-left: 0;
+    }
+}

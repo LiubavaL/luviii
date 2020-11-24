@@ -1,0 +1,93 @@
+@use '../../styles/general/variables';
+@use "@material/ripple/index.scss" as ripple;
+
+.chapter {
+    $chapter: &;
+
+    background-color: variables.$surface-color;
+    display: flex;
+    position: relative;
+    text-decoration: none;
+    box-shadow: variables.$box-shadow;
+
+
+    &__col {
+        position: relative;
+        overflow: hidden;
+        padding: 10px 25px 5px 15px;
+        flex-grow: 1;
+        @include ripple.surface;
+        @include ripple.radius-bounded;
+        @include ripple.states-base-color(variables.$base-color);
+        @include ripple.states-opacities((hover: .1, focus: .3, press: .4));
+    }
+
+    &__body {
+        display: block;
+    }
+
+    &__index {
+        display: block;
+        // margin-top: 5px;
+        font-family: variables.$chapter-index-font-family;
+        font-size: 32px;
+        font-weight: 400;
+        line-height: 32px;
+        color: variables.$primary-color;
+    }
+
+    &__indicator {
+        display: none;
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        min-width: 10px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: variables.$primary-color;
+        box-shadow: 0 0 7px 1px pink;
+    }
+
+    &__cover {
+        min-width: 100px;
+        min-height: 100px;
+    }
+
+    &--new {
+        #{$chapter}__indicator {
+            display: block;
+        }
+    }
+}
+
+@media all and (max-width: 768px) {
+    .chapter {
+        $chapter: &;
+
+        padding: 10px 20px;
+
+        &__cover {
+            display: none;
+        }
+
+        &__col {
+            display: flex;
+            padding: 0;
+        }
+
+        &__body {
+            margin-left: 10px;
+        }
+
+        &__indicator {
+            margin-left: 10px;
+        }
+
+        &--new {
+            #{$chapter}__indicator {
+                position: static;
+            }
+        }
+    }
+}

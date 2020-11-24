@@ -1,0 +1,26 @@
+.ui-kit-page {
+    .container {
+        margin: 20px;
+    }
+    
+    .card {
+        width: 300px;
+    }
+    
+    .button {    
+        width: 200px;
+    }
+    
+    .mdc-dialog {
+        display: block;
+        position: static;
+    
+        &__container {
+            opacity: 1;
+        }
+    }
+    
+    .select {
+        width: 400px;
+    }
+}

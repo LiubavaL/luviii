@@ -1,0 +1,61 @@
+
+.volume {
+    $volume: &;
+    
+    &__item {
+        display: flex;
+        align-items: center;
+        position: relative;
+        border: 1px solid red;
+        
+
+        &:hover {
+            #{$volume}__move,
+            #{$volume}__more,
+            #{$volume}__checkbox {
+                visibility: visible;
+            }
+        }
+    }
+    
+    &__more {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    
+    &__cover {
+        width: 54px;
+        height: 65px;
+        margin-right: 10px;
+        background-position: center;
+        background-size: cover;
+    }
+    
+    &__checkbox {
+        border-radius: 50%;
+        border: 2px solid #d8d8d8;
+        width: 11px;
+        height: 11px;
+        margin-right: 3px;
+    }
+    
+    &__move {
+        margin-right: 5px;
+    
+        &:hover {
+            cursor: move;
+        }
+    }
+
+    &__move,
+    &__more,
+    &__checkbox {
+        visibility: hidden;
+    }
+
+    &__more--open {
+        visibility: visible;
+    }
+}
+

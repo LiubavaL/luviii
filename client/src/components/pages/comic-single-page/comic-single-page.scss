@@ -1,0 +1,66 @@
+@use '../../../styles/general/variables';
+
+.comic-page {
+    &__filter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        margin: 15px 30px;
+        border-radius: 3px;
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+        border: solid 1px #cdcdcd;
+        background-color: variables.$surface-color;
+    }
+
+    &__col{
+        // border: 1px solid purple;
+        width: calc(100%/3);
+
+        &:not(:first-child):not(:last-child){
+            flex-grow: 1;
+        }
+    }
+
+    &__title {
+        // border: 1px solid red;
+        text-align: center;
+    }
+
+    &__chapter {
+        // border: 1px solid green;
+        max-width: 300px;
+        margin-right: auto;
+    }
+
+    &__page {
+        // border: 1px solid blue;
+        max-width: 80px;
+        margin-left: auto;
+    }
+
+    &__image,
+    &__comments {
+        max-width: 1024px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    // Comments
+    &__comments {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    &__comments-tree {
+        margin-top: 20px;
+    }
+
+    &__comment-input {
+        margin-top: 20px;
+    }
+
+    &__comment-thread {
+        margin-left: 40px;
+    }
+}

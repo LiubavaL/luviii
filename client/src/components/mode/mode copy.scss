@@ -1,0 +1,99 @@
+@use "../../styles/general/variables";
+
+$dark: black;
+$light: white;
+$speed: 0.2s;
+
+.mode {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 45px;
+    height: 25px;
+    border-radius: 30px;
+    transition: $speed background-color ease;
+    overflow: hidden;
+
+    span {
+        position: absolute;
+        left: 2px;
+        // top: 31%;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        transition: transform $speed ease, width $speed, height $speed;
+        transform: scale(0.5);
+        
+
+        &:before {
+            content: '';
+            transform: translate(-40px, 0);
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            transition: $speed ease transform;
+        }
+
+        &:after {
+            content: '';
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            margin: -2px 0 0 -2px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transition: $speed transform ease, $speed opacity ease;
+        }
+    }
+
+    input[type=checkbox] {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: 2;
+    }
+
+    &--light {
+        background-color: $light;
+        box-shadow: 0px 0px 2px grey;
+
+        span {
+            background: $dark;
+
+            &:after {
+                transform: scale(2);
+                box-shadow: 0 -9px 0 $dark, 0 9px 0 $dark, 8px 5px 0 $dark, -7px 5px 0 $dark, 8px -4px 0 $dark, -7px -4px 0 $dark;
+            }
+        }
+    }
+
+    &--dark {
+        background-color: gray;
+
+        span {
+            background: $light;
+            left: auto;
+            top: auto;
+            
+            transform: translate(22px, 0);
+
+            &:after {
+                box-shadow: 0 -9px 0 $light, 0 9px 0 $light, 8px 5px 0 $light, -7px 5px 0 $light, 8px -4px 0 $light, -7px -4px 0 $light;
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            &:before {
+                background: gray;
+                transform: translate(-2px, 0);
+            }
+        }
+    }
+}

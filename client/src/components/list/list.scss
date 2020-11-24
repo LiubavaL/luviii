@@ -1,0 +1,17 @@
+@use "../../styles/general/variables";
+@use "@material/list/index.scss" as list;
+
+@include list.core-styles;
+
+.mdc-list {
+    &-item {
+        &--accentuated {
+            color: variables.$primary-color;
+        }
+    }
+
+    &-group__subheader {
+        font-weight: 300 !important;
+        // @include mdc-list-group-subheader-ink-color(#00ff00);
+    }
+}

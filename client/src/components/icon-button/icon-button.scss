@@ -1,0 +1,24 @@
+@use '../../styles/general/variables';
+@use "@material/icon-button/index.scss" as icon-button;
+
+@include icon-button.core-styles;
+
+$icon-size-delimeter: 3;
+
+.mdc-icon-button {
+    &--size_s {
+        @include icon-button.icon-size(variables.$icon-size-s, variables.$icon-size-s, 4px);
+    }
+
+    &--size_m {
+        @include icon-button.icon-size(variables.$icon-size-m, variables.$icon-size-m, variables.$icon-size-m / $icon-size-delimeter);
+    }
+
+    &--size_l {
+        @include icon-button.icon-size(variables.$icon-size-l, variables.$icon-size-l, variables.$icon-size-l / $icon-size-delimeter);
+    }
+
+    &--dialog-close {
+        color: variables.$surface-color;
+    }
+}

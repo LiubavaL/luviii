@@ -1,0 +1,59 @@
+@use '../../styles/general/variables';
+
+.comment {
+    $comment: &;
+
+    display: flex;
+
+    &__actions {
+        display: flex;
+        align-items: center;
+    }
+
+    &__content {
+        width: 100%;
+        margin-left: 10px;
+    }
+
+    &__head {
+        display: flex;
+        align-items: center;
+    }
+    &__menu {
+        visibility: hidden;
+        margin-left: auto;
+    }
+    &:hover &__menu {
+        visibility: visible;
+    }
+
+    &__body  {
+        margin-top: 10px;
+    }
+
+    &__timestamp {
+        margin-left: 8px;
+    }
+
+    &__like {
+        color: gray;
+    }
+
+    &__like-icon {
+        margin-right: 4px;
+
+        #{$comment}__like {
+            vertical-align: sub;
+        }
+    }
+
+    &--highlighted {
+        background-color: rgba(variables.$primary-color, 0.05);
+    }
+
+    &--liked {
+        #{$comment}__like {
+            color: variables.$primary-color;
+        }
+    }
+}
