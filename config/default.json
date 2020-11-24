@@ -1,0 +1,19 @@
+{
+    "port": 5000,
+    "host": "http://localhost",
+    "secret": "somesecretword",
+    "dbConfig": {
+        "uri": "mongodb+srv://liubava:Elhieloelhielo1995@cluster0-83pkx.azure.mongodb.net/luviii?retryWrites=true&w=majority"
+    },
+    "s3": {
+        "domain": "https://luviii-media.s3.eu-central-1.amazonaws.com",
+        "accessKeyId": "AKIA2D6LELJN45O5Q3FW",
+        "secretAccessKey": "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",
+        "apiVersion": "2006-03-01",
+        "region": "eu-central-1",
+        "bucketName": "luviii-media"
+    },
+    "tokenCookieName": "token",
+    "JWT_EXPIRES_IN": 15,
+    "JWT_REFRESH_EXPIRES_IN": 15
+}
