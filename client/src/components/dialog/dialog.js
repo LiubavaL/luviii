@@ -18,7 +18,6 @@ export class Dialog extends Component {
         const {onClosed} = this.props;
 
         this.mdcComponent = new MDCDialog(this.dialogRoot.current);
-        //
         this.mdcComponent.listen('MDCDialog:closed', onClosed);
         this.sync();
     }

@@ -28,7 +28,7 @@ export default class Radio extends Component {
         const {id = "radio-1", label, disabled, name="radios", checked, value} = this.props;
 
         return (
-            // <div class="mdc-form-field" ref={this.formField}>
+            <div class="mdc-form-field" ref={this.formField}>
                 <div class={this.getClassNames()} ref={this.radio}>
                     <input 
                         class="mdc-radio__native-control" 
@@ -45,8 +45,8 @@ export default class Radio extends Component {
                     </div>
                     <div class="mdc-radio__ripple"></div>
                 </div>
-                // {label && <label for={id}>{label}</label>}
-            // </div>
+                {label && <label for={id}>{label}</label>}
+            </div>
       );
     }
 }

@@ -11,3 +11,4 @@ services:
             - /home/node/code/client/node_modules
         ports: 
             - "3001:3000"
+            - "6006:6006"
