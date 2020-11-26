@@ -4,6 +4,10 @@ name: 'Chromatic Deployment'
 # the event that will trigger the action
 on: push
 
+defaults:
+  run:
+    working-directory: ./client
+
 # what the action will do
 jobs:
   test:
