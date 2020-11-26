@@ -15,7 +15,7 @@ jobs:
     # the list of steps that the action will go through
     steps:
       - uses: actions/checkout@v1
-      - run: pwd && npm ci
+      - run: pwd && npm ci && ls -la
       - uses: chromaui/action@v1
         # options required to the GitHub chromatic action
         with:
