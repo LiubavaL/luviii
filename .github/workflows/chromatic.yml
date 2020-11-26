@@ -6,7 +6,7 @@ on: push
 
 defaults:
   run:
-    working-directory: ./client
+    working-directory: client
 
 # what the action will do
 jobs:
