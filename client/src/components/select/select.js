@@ -19,26 +19,27 @@ export default class Select extends Component {
 
         this.mdcComponent = new MDCSelect(this.select.current);
 
-        console.log('select componentDidMount this.mdcComponent ', this.mdcComponent );
+        // console.log('select componentDidMount this.mdcComponent ', this.mdcComponent );
 
         if(onChange){
-            this.mdcComponent.listen('MDCSelect:change', () => {
-                console.log('select change  ', this.mdcComponent.selectedIndex, this.mdcComponent.value);
+            this.mdcComponent.listen('MDCSelect:change', (e) => {
+                console.log(`Selected option at index ${this.mdcComponent.selectedIndex} with value "${this.mdcComponent.value}"`);
 
-                onChange({selectedIndex: this.mdcComponent.selectedIndex, value: this.mdcComponent.value});
+                onChange(e);
+                // onChange({selectedIndex: this.mdcComponent.selectedIndex, value: this.mdcComponent.value});
             });
         }
     }
 
     componentDidUpdate(prevProps){
-        console.log('select componentDidUpdate', prevProps.defaultValue, this.props.defaultValue)
+        // console.log('select componentDidUpdate', prevProps.defaultValue, this.props.defaultValue)
 
         if(this.props.defaultValue != prevProps.defaultValue){
             const selectedIndex = Object.keys(this.props.options).indexOf(this.props.defaultValue )
 
             if( this.mdcComponent.selectedIndex !== selectedIndex){
-                console.log('select mdcComponent', this.mdcComponent)
-                console.log('select mdcComponent value', this.mdcComponent.value)
+                // console.log('select mdcComponent', this.mdcComponent)
+                // console.log('select mdcComponent value', this.mdcComponent.value)
                 // console.log('select mdcComponent Object.keys(this.props.options', Object.keys(this.props.options).findIndex(this.props.defaultValue ))
                 // this.mdcComponent.selectedIndex = Object.keys(this.props.options)
                 this.mdcComponent.selectedIndex = selectedIndex
@@ -118,7 +119,13 @@ export default class Select extends Component {
     }
 
     renderOption({value, label, options,  ...rest}){
-        return <ListItem data-value={value} disabled={!!options}  role='option' {...rest}>{label}</ListItem>;
+        return <ListItem 
+            data-value={value} 
+            disabled={!!options}
+            role='option'
+            {...rest}>
+                {label}
+            </ListItem>;
     }
 
     renderOptions(options, defaultValue, placeholder = null){
@@ -156,7 +163,7 @@ export default class Select extends Component {
                         <List>
                             {subOptions.map((subOption) => {
                                 const isSelected = subOption.value == defaultValue && !hasEmptyOption;
-                                return this.renderOption({...subOption, selected: isSelected, key: subOption.value});
+                                return this.renderOption({...subOption, selected: isSelected, key: subOption.value, value: subOption.label});
                             })}
                         </List>
                         
@@ -167,8 +174,10 @@ export default class Select extends Component {
                 const isSelected = option.value == defaultValue
                 // const isSelected = option.value == defaultValue && !hasEmptyOption;
 
+                console.log('option', option)
+
                 renderedOption.push(
-                    this.renderOption({...option, selected: isSelected, key: option.value})
+                    this.renderOption({...option, selected: isSelected, key: option.value, value: option.label})
                 );
             }
 

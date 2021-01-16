@@ -1,0 +1,108 @@
+@use '../../../../src/styles/general/variables';
+
+.image-field {
+    $hover-field: &;
+    
+    border-radius: 3px;
+    
+    &--empty {
+        padding: 10px;
+        border: dashed 2px #979797;
+        background-color: #e6e6e6;
+        font-family: variables.$primary-font-family;
+        text-align: center;
+    }
+
+    &--highlight {
+        background-color: #fff;
+    }
+
+    &__icon {
+        color: #979797;
+    }
+
+    // Empty
+    &__label {
+        display: block;
+        padding: 5px 10px;
+        border: 1px solid #4a4a4a;
+        border-radius: 3px;
+        font-family: variables.$primary-font-family;
+        font-size: 18px;
+        cursor: pointer;
+        background: variables.$surface-color;
+    }
+
+    &__input {
+        position: absolute;
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        z-index: -1;
+    }
+
+    &__or {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-family: variables.$seconary-font-family;
+        font-size: 12px;
+        // text-align: center;
+        color: #7e7e7e;
+    }
+
+    // Loading
+    &--loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: variables.$surface-color;
+        padding: 20px 30px;
+        border: 1px solid variables.$base-color;
+    }
+
+    &__progress-bar {
+        position: relative;
+        width: 80%;
+        height: 5px;
+        border-radius: 2px;
+        background-color: #e7e6e8;
+        overflow: hidden;
+    }
+
+    &__progress {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: #81c784;
+        border-radius: 2px;
+        height: 100%;
+    }
+
+    // Filled
+    &--filled {
+        position: relative;
+        width: 100%;
+        border: 1px solid grey;
+    }
+
+    &__backdrop {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.5);
+
+        #{$hover-field}:hover & {
+            display: flex;
+        }
+
+        .icon {
+            color: variables.$surface-color;
+        }
+    }
+}

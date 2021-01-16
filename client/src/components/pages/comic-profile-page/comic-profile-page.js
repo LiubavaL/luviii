@@ -186,7 +186,7 @@ export default class ComicProfilePage extends Component {
                 <Dialog
                     open={adultWarningModalOpen}
                     onClosed={() => this.onStartReadingClose()}
-                    noClose
+                    noCloseIcon
                 >
                     {/* <div className="mdn-dialog__headline"> */}
                     <DialogTitle>

@@ -42,9 +42,9 @@ export class Dialog extends Component {
     }
 
     renderCloseIcon(){
-        const {noClose} = this.props;
+        const {noCloseIcon} = this.props;
 
-        const renderedCloseIcon = noClose ? null : 
+        const renderedCloseIcon = noCloseIcon ? null : 
             <div className="mdc-dialog__close">
                 <IconButton 
                     className="mdc-icon-button--dialog-close"

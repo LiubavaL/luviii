@@ -1,2 +1,5 @@
 @import "../../styles/my-theme";
 @import "@material/checkbox/mdc-checkbox";
+// @use "@material/checkbox/index.scss" as checkbox;
+
+// @include checkbox.core-styles

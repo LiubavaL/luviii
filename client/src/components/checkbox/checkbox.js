@@ -19,34 +19,49 @@ export default class Checkbox extends Component {
     }
 
     getCheckboxClassNames(){
-        const {disabled} = this.props;
+        const {disabled, headerRow} = this.props;
 
-        return `mdc-checkbox ${disabled ? 'mdc-checkbox--disabled' : ''}`;
+        return `mdc-checkbox
+            ${disabled ? ' mdc-checkbox--disabled' : ''}
+            ${headerRow ? ' mdc-data-table__header-row-checkbox' : ''}
+        `
+    }
+
+    renderCheckbox(){
+        const {id = 'checkbox_1', label, ...rest} = this.props;
+
+        return <>
+            <div className={this.getCheckboxClassNames()} ref={this.input}>
+                <input type="checkbox"
+                    className="mdc-checkbox__native-control"
+                    id={id} 
+                    {...rest}
+                />
+                <div className="mdc-checkbox__background">
+                    <svg className="mdc-checkbox__checkmark"
+                        viewBox="0 0 24 24">
+                        <path className="mdc-checkbox__checkmark-path"
+                            fill="none"
+                            d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                    </svg>
+                    <div className="mdc-checkbox__mixedmark"></div>
+                </div>
+                <div className="mdc-checkbox__ripple"></div>
+            </div>
+            {label && <label for={id}>{label}</label>}
+        </>
     }
 
     render(){
-        const {id = 'checkbox_1', label, ...rest} = this.props;
+        // const {headerRow} = this.props;
+
+        // if(headerRow){
+        //     return this.renderCheckbox()
+        // }
 
         return (
-            <div class="mdc-form-field" ref={this.field}>
-                <div class={this.getCheckboxClassNames()} ref={this.input}>
-                    <input type="checkbox"
-                        class="mdc-checkbox__native-control"
-                        id={id} 
-                        {...rest}
-                    />
-                    <div class="mdc-checkbox__background">
-                        <svg class="mdc-checkbox__checkmark"
-                            viewBox="0 0 24 24">
-                            <path class="mdc-checkbox__checkmark-path"
-                                fill="none"
-                                d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
-                        </svg>
-                        <div class="mdc-checkbox__mixedmark"></div>
-                    </div>
-                    <div class="mdc-checkbox__ripple"></div>
-                </div>
-                {label && <label for={id}>{label}</label>}
+            <div className="mdc-form-field" ref={this.field}>
+                {this.renderCheckbox()}
             </div>
       );
     }

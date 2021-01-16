@@ -1,0 +1,53 @@
+@use '../../../../src/styles/general/variables';
+
+.pages-form {
+    // $chapter-form: &;
+    display: flex;
+    align-items: center;
+
+    &--with-pages {
+        flex-direction: column;
+
+        // #{$chapter-form}__filename {
+        //     display: none;
+        // }
+    }
+
+    &__item {
+        display: inline-block;
+        margin-right: 6px;
+    }
+    
+    &__image {
+        width: 70px;
+        border: 1px solid gray;
+    }
+    
+    &__actions {
+        margin-top: 20px;
+    
+        .mdc-button:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+    
+    &__typography,
+    &__filename {
+        margin-right: 10px;
+    }
+
+    &__input {
+        font-size: 14px;
+        font-family: variables.$primary-font-family;
+        color: #8d8a8a;
+        cursor: pointer;
+
+        input[type=file] {
+            display: none;
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

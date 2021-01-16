@@ -32,7 +32,8 @@ $mdc-typography-styles-caption: (
 );
 
 $mdc-typography-styles-overline: (
-    line-height: normal
+    line-height: normal,
+    display: block
 );
 
 @import "@material/typography/mdc-typography";

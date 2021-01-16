@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Children} from 'react';
 
 import {MDCRipple} from '@material/ripple';
 import {MDCIconButtonToggle} from '@material/icon-button';
@@ -46,7 +46,7 @@ export default class IconButton extends Component {
     }
 
     render () {
-        const {icon, tag = 'button', onIcon, className : extraClass, ...rest} = this.props,
+        const {icon, tag = 'button', onIcon, className : extraClass, children, ...rest} = this.props,
             Tag = `${tag}`;
 
         return (
@@ -61,6 +61,7 @@ export default class IconButton extends Component {
             >
                <Icon src={icon} className="mdc-icon-button__icon"/>
                {onIcon && <Icon src={onIcon} className='mdc-icon-button__icon mdc-icon-button__icon--on' />}
+               {children}
             </Tag>
         );
     }

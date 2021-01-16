@@ -1,0 +1,11 @@
+.row {
+    display: flex;
+
+    &--highlighted {
+        background-color: #f5f5fb;
+    }
+
+    &:hover {
+        background-color: #f2f2f8;
+    }
+}

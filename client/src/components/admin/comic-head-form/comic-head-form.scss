@@ -1,0 +1,15 @@
+.comic-head-form {
+    display: flex;
+    
+    &__image-field {
+        max-width: 150px;
+    }
+    
+    &__headlines {
+        margin-left: 10px;
+    
+        .mdc-text-field:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    }
+}

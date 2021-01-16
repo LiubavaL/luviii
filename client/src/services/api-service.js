@@ -107,6 +107,8 @@ class ApiService {
             const body = await res.json()
             const faqs = body.faqs
             const parsedFaqs = faqs.map(({answer, ...rest}) => {
+                //TODO подумать, можно ли вынести это преобразование draftToHtml 
+                // в одно место для всех трех методов
                 const answerMarkup = draftToHtml(JSON.parse(answer))
                 
                 return {
@@ -133,7 +135,12 @@ class ApiService {
 
         if(res.status === 201){
             const {faq} = await res.json()
-            return faq
+            const answerMarkup = draftToHtml(JSON.parse(faq.answer))
+
+            return {
+                ...faq,
+                answerMarkup
+            }
         } 
 
         return null
@@ -153,13 +160,22 @@ class ApiService {
 
         if(res.status === 200){
             const {faq} = await res.json()
-            return faq
+            const answerMarkup = draftToHtml(JSON.parse(faq.answer))
+
+            return {
+                ...faq,
+                answerMarkup
+            }
         }
 
         return null
     }
 
     async deleteFaq(id){
+        return await this.deleteFaqs([id])
+    }
+
+    async deleteFaqs(ids){
         const res = await fetch('/api/faqs/delete',
             {
                 method: "POST",
@@ -167,13 +183,15 @@ class ApiService {
                     "Content-Type": 'application/json',
                     ...this.getAuthHeader()
                 },
-                body: JSON.stringify({id})
+                body: JSON.stringify({ids})
             }
         )
 
+        console.log('res', res)
+
         if(res.status === 200){
-            const {id} = res
-            return id
+            const {ids} = await res.json()
+            return ids
         } 
     }
 

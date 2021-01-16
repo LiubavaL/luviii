@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import {Editor, EditorState, RichUtils, CompositeDecorator, DefaultDraftBlockRenderMap, Modifier, convertToRaw, ContentState} from 'draft-js'
 import {Map} from 'immutable'
 import config from './config'
-
 import 'draft-js/dist/Draft.css'
+import HelperText from '../../helper-text/helper-text'
+
 import './editor.scss'
 
 const HashtagSpan = (props) => {
@@ -306,8 +307,16 @@ export default class TextEditor extends Component {
         </div>
     }
 
+    getClassNames(){
+        const {invalid} = this.props
+
+        return `editor
+            ${invalid ? ' editor--invalid' : ''}
+        `
+    }
+
     render() {
-        // const {contentState} = this.props
+        const {helpText} = this.props
         const {props, emojiModalOpen} = this.state
         const blockRenderMap = Map({
             'CustomSpan': {
@@ -362,7 +371,7 @@ export default class TextEditor extends Component {
             </div>
             <button onClick={this._onResetStyleClick} type="button">Remove</button>
 
-            <div className="editor">
+            <div className={this.getClassNames()}>
                 <Editor 
                     editorState={this.state.editorState} 
                     handleKeyCommand={this.handleKeyCommand}
@@ -377,6 +386,7 @@ export default class TextEditor extends Component {
                     {...props}
                 />
             </div>
+            {helpText && <div className="editor__helper-text">{helpText}</div>}
             {/* <button onClick={this.logBlock} type="button">Log Block</button> */}
         </>
     }
