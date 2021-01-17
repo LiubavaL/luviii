@@ -5,30 +5,30 @@ import {paginate} from '../utils'
 const withPagination = (Wrapped) => {
     return class extends Component {
         ranges = [3, 5, 10, 50]
-        defaultRange = 0
+        // defaultRange = 0
 
         state = {
             pagination: {
-                range: 3,
-                active: 0
+                rangeIndex: 0,
+                activeChunk: 0// activeChunk chunk
             }
         }
 
-        onChangeRange = ({range, active}) => {
+        onChangeRange = ({rangeIndex, activeChunk}) => {
             this.setState({
                 pagination: {
                     ...this.state.pagination,
-                    range,
-                    active
+                    rangeIndex,
+                    activeChunk
                 }
             })
         }
 
-        onChangeActiveRange = (active) => {
+        onChangeActiveRange = (activeChunk) => {
             this.setState({
                 pagination: {
                     ...this.state.pagination,
-                    active
+                    activeChunk
                 }
             })
         }
@@ -39,7 +39,7 @@ const withPagination = (Wrapped) => {
             this.setState({
                 pagination: {
                     ...pagination,
-                    active: pagination.active + 1
+                    activeChunk: pagination.activeChunk + 1
                 }
             })
         }
@@ -50,7 +50,7 @@ const withPagination = (Wrapped) => {
             this.setState({
                 pagination: {
                     ...pagination,
-                    active: pagination.active - 1
+                    activeChunk: pagination.activeChunk - 1
                 } 
             })
         }
@@ -60,7 +60,7 @@ const withPagination = (Wrapped) => {
 
             return <Wrapped 
                 ranges={this.ranges}
-                defaultRange={this.defaultRange}
+                // defaultRange={this.defaultRange}
                 paginate={paginate}
                 pagination={pagination}
                 onChangeRange={this.onChangeRange}

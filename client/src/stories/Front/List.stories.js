@@ -79,9 +79,9 @@ export const WithCheckbox = () => <List>
     </ListItem>
 </List>
 
-export const WithIcon = () => <List>
+export const WithImage = () => <List>
 <ListItem withRipple>
-    <ListItemGraphic icon="thump_up"/>
+    <ListItemGraphic icon={<img src="images/happyNY.png" />}/>
     <ListItemText>
         Title 1
     </ListItemText>

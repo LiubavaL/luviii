@@ -1,10 +1,9 @@
 @use "@material/data-table/data-table.scss" as data-table;
+@use "@material/data-table/mixins";
 
-// @include checkbox.core-styles;
-// @include icon-button.core-styles;
 @include data-table.core-styles;
 @include data-table.theme-baseline;
-
+@include mixins.cell-height(auto)
 // .data-table {
 //     width: 100%;
 

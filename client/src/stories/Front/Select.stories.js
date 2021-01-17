@@ -71,11 +71,11 @@ export const WithLevels = Template.bind({})
 WithLevels.args = {
     options: [
         {
-            label: "Level1",
+            label: "Title 1",
             value: 1
         },
         {
-            label: "Level1 - title",
+            label: "Title 2",
             options: [
                 {
                     label: "level2 - 1",
@@ -90,7 +90,7 @@ WithLevels.args = {
             ]
         },
         {
-            label: "Level1",
+            label: "Title 3",
             value: 2,
             'aria-disabled': true,
             tabIndex: -1

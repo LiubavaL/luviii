@@ -117,6 +117,7 @@ export class ListItem extends Component {
         tabIndex={selected ? 0 : undefined}
         {...rest}
         >
+          <span class="mdc-list-item__ripple"></span>
           {children}
       </li>
     );

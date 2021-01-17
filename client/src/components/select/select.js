@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 import {MDCSelect} from '@material/select';
 import Icon from '../icon';
-
-import {List, ListItem, ListGroupSubheader, ListDivider, ListGroup} from '../list';
+import {List, ListItem, ListItemText, ListGroupSubheader, ListDivider, ListGroup} from '../list';
 
 import './select.scss';
 
@@ -16,32 +15,22 @@ export default class Select extends Component {
 
     componentDidMount(){
         const {onChange} = this.props;
-
         this.mdcComponent = new MDCSelect(this.select.current);
-
-        // console.log('select componentDidMount this.mdcComponent ', this.mdcComponent );
 
         if(onChange){
             this.mdcComponent.listen('MDCSelect:change', (e) => {
                 console.log(`Selected option at index ${this.mdcComponent.selectedIndex} with value "${this.mdcComponent.value}"`);
 
                 onChange(e);
-                // onChange({selectedIndex: this.mdcComponent.selectedIndex, value: this.mdcComponent.value});
             });
         }
     }
 
     componentDidUpdate(prevProps){
-        // console.log('select componentDidUpdate', prevProps.defaultValue, this.props.defaultValue)
-
         if(this.props.defaultValue != prevProps.defaultValue){
             const selectedIndex = Object.keys(this.props.options).indexOf(this.props.defaultValue )
 
             if( this.mdcComponent.selectedIndex !== selectedIndex){
-                // console.log('select mdcComponent', this.mdcComponent)
-                // console.log('select mdcComponent value', this.mdcComponent.value)
-                // console.log('select mdcComponent Object.keys(this.props.options', Object.keys(this.props.options).findIndex(this.props.defaultValue ))
-                // this.mdcComponent.selectedIndex = Object.keys(this.props.options)
                 this.mdcComponent.selectedIndex = selectedIndex
             }
         }
@@ -124,7 +113,7 @@ export default class Select extends Component {
             disabled={!!options}
             role='option'
             {...rest}>
-                {label}
+                <ListItemText>{label}</ListItemText>
             </ListItem>;
     }
 
@@ -172,12 +161,13 @@ export default class Select extends Component {
                 );
             } else {
                 const isSelected = option.value == defaultValue
-                // const isSelected = option.value == defaultValue && !hasEmptyOption;
-
-                console.log('option', option)
-
                 renderedOption.push(
-                    this.renderOption({...option, selected: isSelected, key: option.value, value: option.label})
+                    this.renderOption({
+                        ...option, 
+                        selected: isSelected, 
+                        key: option.value, 
+                        value: option.label
+                    })
                 );
             }
 
@@ -188,54 +178,76 @@ export default class Select extends Component {
     }
 
     getClassNames(){
-        const {disabled, label, outlined, icon, simple, theme} = this.props;
+        const {disabled, label, outlined, icon, simple, theme, className} = this.props;
 
-        return `mdc-select
+        return `mdc-select ${className}
             ${simple ? ' mdc-select--simple' : ''}
             ${theme ? ` mdc-select--theme_${theme}` : ''}
             ${disabled ? ' mdc-select--disabled' : ''}
             ${label ? '' : ' mdc-select--no-label'}
-            ${outlined ? ' mdc-select--outlined' : ''}
+            ${outlined ? ' mdc-select--outlined' : '  mdc-select--filled'}
             ${icon ? ' mdc-select--with-leading-icon' : ''}`
     }
 
     getStyleVariant(){
-        const {outlined, simple, label} = this.props;
-        let styleElements = null;
+        const {outlined, label} = this.props
 
         if(outlined){
-            styleElements = <div className="mdc-notched-outline">
-                <div className="mdc-notched-outline__leading"></div>
-                {label && 
-                    <div className="mdc-notched-outline__notch">
-                        <span id="outlined-select-label" className="mdc-floating-label">{label}</span>
-                    </div>
-                }
-                <div className="mdc-notched-outline__trailing"></div>
-            </div>
-        } else {
-            styleElements = <React.Fragment>
-                {label && <span className="mdc-floating-label">{label}</span>}
-                {!simple && <div className="mdc-line-ripple"></div>}
-            </React.Fragment>;
-        }
+            return (
+                <div className="mdc-notched-outline">
+                    <div className="mdc-notched-outline__leading"></div>
+                    {label && 
+                        <div className="mdc-notched-outline__notch">
+                            <span id="outlined-select-label" className="mdc-floating-label">{label}</span>
+                        </div>
+                    }
+                    <div className="mdc-notched-outline__trailing"></div>
+                </div>
+            )
+        } 
 
-        return styleElements;
+        return (
+            <>
+                <span class="mdc-select__ripple"></span>
+                {label && <span className="mdc-floating-label">{label}</span>}
+            </>
+        )
     }
     
     render(){
-        const {options, defaultValue, placeholder = null, icon} = this.props,
+        const {options, defaultValue, placeholder = null, icon, simple, outlined} = this.props,
             preparedOptions = this.createSelectOptions(options);
 
         return (
             <div className={this.getClassNames()} ref={this.select} role="listbox">
-                <div className="mdc-select__anchor">
+                {/* <input type="hidden" name="demo-input" /> */}
+                <div className="mdc-select__anchor"  role="button" aria-haspopup="listbox" tabindex="0">
                     {icon && <Icon src={icon} className="mdc-select__icon"/>}
-                    <i className="mdc-select__dropdown-icon"></i>
-                    <div className="mdc-select__selected-text" role="button" aria-haspopup="listbox"></div>
                     {this.getStyleVariant()}
+                    <span class="mdc-select__selected-text-container">
+                        <span class="mdc-select__selected-text"></span>
+                    </span>
+                    <span class="mdc-select__dropdown-icon">
+                        <svg
+                            class="mdc-select__dropdown-icon-graphic"
+                            viewBox="7 10 10 5">
+                            <polygon
+                                class="mdc-select__dropdown-icon-inactive"
+                                stroke="none"
+                                fill-rule="evenodd"
+                                points="7 10 12 15 17 10">
+                            </polygon>
+                            <polygon
+                                class="mdc-select__dropdown-icon-active"
+                                stroke="none"
+                                fill-rule="evenodd"
+                                points="7 15 12 10 17 15">
+                            </polygon>
+                        </svg>
+                    </span>
+                    {!simple && !outlined && <div className="mdc-line-ripple"></div>}
                 </div>
-                <div className="mdc-select__menu mdc-menu mdc-menu-surface">
+                <div className="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth" role="listbox">
                     <List>
                         {this.renderOptions(preparedOptions, defaultValue, placeholder)}
                     </List>
@@ -243,4 +255,49 @@ export default class Select extends Component {
             </div>
         );
     }
+
+
+        // <div class="mdc-select mdc-select--outlined mdc-select--no-label mdc-data-table__pagination-rows-per-page-select">
+        //                     <div class="mdc-select__anchor" role="button" aria-haspopup="listbox" aria-labelledby="demo-pagination-select" tabindex="0">
+        //                         <span class="mdc-select__selected-text-container">
+        //                             <span id="demo-pagination-select" class="mdc-select__selected-text">10</span>
+        //                         </span>
+        //                         <span class="mdc-select__dropdown-icon">
+        //                             <svg
+        //                                 class="mdc-select__dropdown-icon-graphic"
+        //                                 viewBox="7 10 10 5">
+        //                                 <polygon
+        //                                     class="mdc-select__dropdown-icon-inactive"
+        //                                     stroke="none"
+        //                                     fill-rule="evenodd"
+        //                                     points="7 10 12 15 17 10">
+        //                                 </polygon>
+        //                                 <polygon
+        //                                     class="mdc-select__dropdown-icon-active"
+        //                                     stroke="none"
+        //                                     fill-rule="evenodd"
+        //                                     points="7 15 12 10 17 15">
+        //                                 </polygon>
+        //                             </svg>
+        //                         </span>
+        //                         <span class="mdc-notched-outline mdc-notched-outline--notched">
+        //                             <span class="mdc-notched-outline__leading"></span>
+        //                             <span class="mdc-notched-outline__trailing"></span>
+        //                         </span>
+        //                     </div>
+
+        //                     <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth" role="listbox">
+        //                         <ul class="mdc-list">
+        //                             <li class="mdc-list-item mdc-list-item--selected" aria-selected="true" role="option" data-value="10">
+        //                                 <span class="mdc-list-item__text">10</span>
+        //                             </li>
+        //                             <li class="mdc-list-item" role="option" data-value="25">
+        //                                 <span class="mdc-list-item__text">25</span>
+        //                             </li>
+        //                             <li class="mdc-list-item" role="option" data-value="100">
+        //                                 <span class="mdc-list-item__text">100</span>
+        //                             </li>
+        //                         </ul>
+        //                     </div>
+        //                 </div>
 }

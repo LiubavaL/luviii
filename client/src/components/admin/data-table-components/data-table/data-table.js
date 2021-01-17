@@ -12,6 +12,7 @@ import {sort} from './utils'
 import withSearch from '../data-table/hoc/withSearch'
 import withPagination from '../data-table/hoc/withPagination'
 import {MDCDataTable} from '@material/data-table'
+import IconButton from '../../../icon-button'
 
 import './data-table.scss'
 
@@ -133,8 +134,8 @@ class DataTable extends Component {
             onEdit,
             onDelete,
             pagination: {
-                range,
-                active
+                rangeIndex,
+                activeChunk
             },
             searchText,
             search,
@@ -167,9 +168,9 @@ class DataTable extends Component {
             return this.renderNoData()
         }
 
-        preparedData = paginate(preparedData, range)
+        preparedData = paginate(preparedData, rangeIndex)
 
-        const bodyToRender = preparedData[active].map((item, i) => {
+        const bodyToRender = preparedData[activeChunk].map((item, i) => {
             const preparedRowData = this.prepareDataForRow(item)
             // const highlighted = Boolean(i%2)
             /**
@@ -269,30 +270,31 @@ class DataTable extends Component {
 
     onChangeRange = (e) => {
         this.props.onChangeRange({
-            range: +e.detail.value,
-            active: 0
+            rangeIndex: +e.detail.value,
+            activeChunk: 0
         })
     }
 
-    onChangeActiveRange(active){
-        this.props.onChangeActiveRange(active)
+    onChangeActiveRange(activeChunk){
+        this.props.onChangeActiveRange(activeChunk)
     }
 
-    renderPaginationNav = (data, range, active) => {
+    renderPaginationNav = (ranges, data, {rangeIndex, activeChunk}) => {
         if(!Array.isArray(data)){
             return null
         }
 
         const {paginate} = this.props
+        const range = ranges[rangeIndex]
         const paginatedData = paginate(data, range)
         const total = data.length
-        const from = active*range + 1, to = (total > range * (active + 1)) ? range * (active + 1) : total
-        const prevDisabled = active === 0
-        const nextDisabled = active === paginatedData.length - 1
+        const from = activeChunk*range + 1, to = (total > range * (activeChunk + 1)) ? range * (activeChunk + 1) : total
+        const prevDisabled = activeChunk === 0
+        const nextDisabled = activeChunk === paginatedData.length - 1
         // const navButtons = paginatedData.map((v, i) => {
         //     const label = i + 1
 
-        //     if(i === active){
+        //     if(i === activeChunk){
         //         return <span>{label}</span>
         //     }
 
@@ -303,76 +305,58 @@ class DataTable extends Component {
         <div class="mdc-data-table__pagination">
             <div class="mdc-data-table__pagination-trailing">
                 <div class="mdc-data-table__pagination-rows-per-page">
-                    <div class="mdc-data-table__pagination-rows-per-page-label">
-                    Rows per page
-                    </div>
-
-                    <div class="mdc-select mdc-select--outlined mdc-select--no-label mdc-data-table__pagination-rows-per-page-select">
-                    <div class="mdc-select__anchor" role="button" aria-haspopup="listbox"
-                            aria-labelledby="demo-pagination-select" tabindex="0">
-                        <span class="mdc-select__selected-text-container">
-                        <span id="demo-pagination-select" class="mdc-select__selected-text">10</span>
-                        </span>
-                        <span class="mdc-select__dropdown-icon">
-                        <svg
-                            class="mdc-select__dropdown-icon-graphic"
-                            viewBox="7 10 10 5">
-                            <polygon
-                                class="mdc-select__dropdown-icon-inactive"
-                                stroke="none"
-                                fill-rule="evenodd"
-                                points="7 10 12 15 17 10">
-                            </polygon>
-                            <polygon
-                                class="mdc-select__dropdown-icon-active"
-                                stroke="none"
-                                fill-rule="evenodd"
-                                points="7 15 12 10 17 15">
-                            </polygon>
-                        </svg>
-                        </span>
-                        <span class="mdc-notched-outline mdc-notched-outline--notched">
-                        <span class="mdc-notched-outline__leading"></span>
-                        <span class="mdc-notched-outline__trailing"></span>
-                        </span>
-                    </div>
-
-                    <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth" role="listbox">
-                        <ul class="mdc-list">
-                        <li class="mdc-list-item mdc-list-item--selected" aria-selected="true" role="option" data-value="10">
-                            <span class="mdc-list-item__text">10</span>
-                        </li>
-                        <li class="mdc-list-item" role="option" data-value="25">
-                            <span class="mdc-list-item__text">25</span>
-                        </li>
-                        <li class="mdc-list-item" role="option" data-value="100">
-                            <span class="mdc-list-item__text">100</span>
-                        </li>
-                        </ul>
-                    </div>
-                    </div>
+                    <div class="mdc-data-table__pagination-rows-per-page-label">Записей на страницу:</div>
+                    <Select 
+                        options={[2, 6, 100]}
+                        className="mdc-data-table__pagination-rows-per-page-select"
+                        defaultValue={0}
+                        onChange={this.onChangeRange}
+                        outlined
+                    />
                 </div>
 
                 <div class="mdc-data-table__pagination-navigation">
-                    <div class="mdc-data-table__pagination-total">
-                    {from} - {to} из {total}
-                    </div>
-                    <button 
+                    <div class="mdc-data-table__pagination-total">{from} - {to} из {total}</div>
+                    <IconButton 
+                        icon="first_page"
+                        data-first-page="true"
+                        disabled={prevDisabled}
+                        onClick={() => this.onChangeActiveRange(0)}
+                    />
+                    <IconButton 
+                        icon="chevron_left"
+                        data-prev-page="true" 
+                        disabled={prevDisabled}
+                        onClick={this.props.onClickPrev}
+                    />
+                    <IconButton 
+                        icon="chevron_right"
+                        data-next-page="true"
+                        disabled={nextDisabled}
+                        onClick={this.props.onClickNext}
+                    />
+                    <IconButton 
+                        icon="last_page"
+                        data-last-page="true"
+                        disabled={nextDisabled}
+                        onClick={() => this.onChangeActiveRange(paginatedData.length - 1)}
+                    />
+                    {/* <button 
                         class="mdc-icon-button material-icons mdc-data-table__pagination-button" 
                         data-first-page="true"
                         disabled={prevDisabled}
                         onClick={() => this.onChangeActiveRange(0)}
                     >
-                    <div class="mdc-button__icon">first_page</div>
-                    </button>
-                    <button 
+                        <div class="mdc-button__icon">first_page</div>
+                    </button> */}
+                    {/* <button 
                         class="mdc-icon-button material-icons mdc-data-table__pagination-button" 
                         data-prev-page="true" 
                         disabled={prevDisabled}
                         onClick={this.props.onClickPrev}>
                         <div class="mdc-button__icon">chevron_left</div>
-                    </button>
-                    <button 
+                    </button> */}
+                    {/* <button 
                         class="mdc-icon-button material-icons mdc-data-table__pagination-button" 
                         data-next-page="true"
                         disabled={nextDisabled}
@@ -386,7 +370,7 @@ class DataTable extends Component {
                         onClick={() => this.onChangeActiveRange(paginatedData.length - 1)}
                     >
                     <div class="mdc-button__icon">last_page</div>
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </div>
@@ -435,12 +419,9 @@ class DataTable extends Component {
             data,
             config,
             searchText,
-            pagination: {
-                range,
-                active
-            },
+            pagination,
             ranges,
-            defaultRange
+            // defaultRange
         } = this.props
 
         return ( 
@@ -460,7 +441,7 @@ class DataTable extends Component {
                     {this.renderBody(data)}
                 </table>
             </div>
-            {this.renderPaginationNav(data, range, active)}
+            {this.renderPaginationNav(ranges, data, pagination)}
             {this.renderProgressIndicator()}
         </div>
         )

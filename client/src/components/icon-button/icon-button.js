@@ -55,7 +55,7 @@ export default class IconButton extends Component {
                 aria-label="Add to favorites"
                 data-aria-label-on="Remove from favorites"
                 data-aria-label-off="Add to favorites"
-                aria-pressed="true"
+                // aria-pressed="true"
                 ref={this.container}
                 {...rest}
             >

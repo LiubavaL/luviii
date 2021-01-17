@@ -3,8 +3,8 @@
 @use "@material/list/mdc-list";
 @use "@material/menu-surface/mdc-menu-surface";
 @use "@material/menu/mdc-menu";
-@use "@material/select/mdc-select";
 @use "@material/select/mixins";
+@use "@material/select/styles";
 
 .mdc-select {
     $select: &;

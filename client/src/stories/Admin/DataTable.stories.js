@@ -51,5 +51,6 @@ Filled.args = {
         {id: 8970, name: "Your title goues here", description: " problem persists, check the browser cons  problem persists, check the browser cons", created_at: "00-12-20"},
         {id: 120, name: "Hello everybody", description: "gcvf", created_at: "02-12-20"}
     ],
+    selectedItems: [3456],
     defaultSortField: "id"
 }
