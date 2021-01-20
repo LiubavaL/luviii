@@ -3,14 +3,11 @@ import React, { Component } from 'react'
 import Typography from '../../../typography'
 import TextField from '../../../text-field'
 import Button from '../../../button'
-import IconButton from '../../../icon-button'
 import Loader from '../../../loader'
 import ErrorIndicator from '../../../error-indicator'
 import apiService from '../../../../services/api-service';
-
 import TextEditor from '../../editor'
 import {EditorState, convertToRaw, convertFromRaw} from 'draft-js'
-import draftToHtml from 'draftjs-to-html'
 import { Dialog, DialogActions, DialogContent, DialogButton, DialogTitle } from '../../../dialog'
 import DataTable from '../../data-table-components/data-table/data-table'
 import { Formik } from 'formik';
@@ -68,12 +65,12 @@ export default class FaqPage extends Component {
         }
     }
 
-    handleDelete = async (id) => {
-        const resId = await apiService.deleteFaq(id)
+    async handleDelete(id) {
+        const [resId] = await apiService.deleteFaq(id)
 
         if(resId === id){
             const updFaqs = this.state.faqs.filter(({_id}) => _id !== id)
-            
+
             this.setState({
                 faqs: updFaqs,
                 dialog: {

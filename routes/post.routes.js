@@ -117,29 +117,49 @@ router.post('/edit', [withAuth, upload.array('images')], async (req, res) => {
 //delete post
 router.post('/delete', withAuth, async (req, res) => {
     try {
-        const {id} = req.body
-        console.log('DELETE id', id)
-        const postToDelete = await Post.findById(id)
-
-        if(postToDelete.imagesPaths.length){
-            const objsToDelete = postToDelete.imagesPaths.map(image => new Object({Key: image}))
-            const params = {
-                Bucket: bucket, 
-                Delete: {
-                 Objects: objsToDelete, 
-                 Quiet: false
-                }
+        const {ids} = req.body
+        const query = Post.find({_id: ids})
+        let params = {
+            Bucket: bucket, 
+            Delete: {
+                Objects: [
+            //     {
+            //    Key: "HappyFace.jpg", 
+            //   }, 
+            //     {
+            //    Key: "HappyFace.jpg", 
+            //   }
+                ], 
+                Quiet: false
             }
-    
-            const data = await s3.deleteObjects(params).promise()
-            if(data) {
-                console.log('deleteObjects data', data)
+        };
+        let s3Result = null
+        let imagesForDeleteCount = 0
+
+        for (const postToDelete of await query){
+            if(postToDelete.imagesPaths.length){
+                const objsToDelete = postToDelete.imagesPaths.map(image => new Object({Key: image}))
+
+                params.Delete.Objects.push(...objsToDelete)
             }
         }
+        imagesForDeleteCount = params.Delete.Objects.length
 
-        await Post.findByIdAndDelete(id)
+        if(imagesForDeleteCount){
+            s3Result = await s3.deleteObjects(params).promise()
+        }
 
-        res.status(200).json({id})
+        if(!imagesForDeleteCount || s3Result.Deleted.length === imagesForDeleteCount){
+            const result = await Post.deleteMany(query)
+
+            if(result.deletedCount === ids.length){
+                res.status(200).json({ids})
+            }
+
+            throw new Error("Failed to delete selected posts")
+        }
+
+        throw new Error("Failed to delete selected posts images")
     } catch (e){
         res.status(500).json({message: e.message})
     }

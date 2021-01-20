@@ -75,7 +75,11 @@ class ApiService {
         return null
     }
 
-    async deletePost(id){
+    deletePost(id){
+        return this.deletePosts([id])
+    }
+
+    async deletePosts(ids){
         let res = await fetch(
             '/api/posts/delete',
             {
@@ -84,12 +88,13 @@ class ApiService {
                     ...this.getAuthHeader()
                 },
                 method: "POST",
-                body: JSON.stringify({id})
+                body: JSON.stringify({ids})
             })
 
         if(res.status === 200 ) {
-            const {id} = await res.json()
-            return id
+            res = await res.json()
+            
+            return res.ids
         }
 
         return null
@@ -187,10 +192,9 @@ class ApiService {
             }
         )
 
-        console.log('res', res)
-
         if(res.status === 200){
             const {ids} = await res.json()
+
             return ids
         } 
     }
@@ -406,8 +410,12 @@ class ApiService {
         return null
     }
 
-    async deleteStatus(id){
-        const res = await fetch(
+    deleteStatus(id){
+         return this.deleteStatuses([id])
+    }
+
+    async deleteStatuses(ids){
+        let res = await fetch(
             '/api/statuses/delete',
             {
                 method: "POST",
@@ -415,12 +423,14 @@ class ApiService {
                     "Content-Type": 'application/json',
                     ...this.getAuthHeader()
                 },
-                body: JSON.stringify({id})
+                body: JSON.stringify({ids})
             }
          )
  
          if(res.status === 200){
-             return id
+            res = await res.json()
+
+            return res.ids
          }
 
          return null
@@ -440,8 +450,12 @@ class ApiService {
         }
     }
 
-    async deleteGenre(id){
-        const res = await fetch(
+    deleteGenre(id){
+        return this.deleteGenres([id])
+    }
+
+    async deleteGenres(ids){
+        let res = await fetch(
             '/api/genres/delete',
             {
                 method: "POST",
@@ -449,15 +463,17 @@ class ApiService {
                     "Content-Type": 'application/json',
                     ...this.getAuthHeader()
                 },
-                body: JSON.stringify({id})
+                body: JSON.stringify({ids})
             }
         )
 
         if(res.status === 200){
-            return res.id
+            res = await res.json()
+
+            return res.ids
         }
 
-        return null
+        return []
     }
 
     async editGenre(form){

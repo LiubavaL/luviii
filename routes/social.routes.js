@@ -92,23 +92,24 @@ router.post('/delete', withAuth, async(req, res) => {
         let params = {
             Bucket: bucket, 
             Delete: {
-             Objects: [
+                Objects: [
             //     {
             //    Key: "HappyFace.jpg", 
             //   }, 
             //     {
             //    Key: "HappyFace.jpg", 
             //   }
-             ], 
-             Quiet: false
+                ], 
+                Quiet: false
             }
-           };
+        };
 
         for (const social of socials){
             params.Delete.Objects.push({
                 Key: social.iconPath
             })
         }
+
         const s3Result = await s3.deleteObjects(params).promise()
         /*
             data = {
