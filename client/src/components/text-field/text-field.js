@@ -64,8 +64,6 @@ export default class TextField extends Component {
             invalid
         } = this.props;
 
-        console.log('getClassNames invalid ', invalid)
-
         return `mdc-text-field
             ${fullWidth ? 'mdc-text-field--fullwidth' : ''}
             ${invalid ? 'mdc-text-field--invalid' : ''}

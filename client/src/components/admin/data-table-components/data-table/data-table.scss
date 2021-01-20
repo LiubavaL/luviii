@@ -3,7 +3,11 @@
 
 @include data-table.core-styles;
 @include data-table.theme-baseline;
-@include mixins.cell-height(auto)
+@include mixins.cell-height(auto);
+
+.mdc-data-table__cell {
+    max-width: 100px;
+}
 // .data-table {
 //     width: 100%;
 

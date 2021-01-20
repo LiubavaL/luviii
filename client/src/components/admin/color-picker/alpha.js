@@ -58,7 +58,7 @@ export default class Alpha extends Component {
     paintAlpha(canvasEl){
         const ctx = canvasEl.getContext('2d')
         const {r, g, b} = this.props.color
-        console.log('this.props.color', this.props.color)
+        // console.log('this.props.color', this.props.color)
 
         ctx.clearRect(0, 0, squareSize, barSize)
         this.createPattern(canvasEl)
@@ -72,14 +72,14 @@ export default class Alpha extends Component {
     }
 
     onMouseMove = throttle((e) => {
-        console.log('alpha onMouseMove')
+        // console.log('alpha onMouseMove')
         const {clientX} = e
         const targetX = this.canvas.current.getBoundingClientRect().left
         let alphaX = clientX - targetX
         const {setAlpha} = this.props
         
-        console.log('alphaX', alphaX)
-        console.log('squareSize', squareSize)
+        // console.log('alphaX', alphaX)
+        // console.log('squareSize', squareSize)
         
         if(alphaX < 0){
             alphaX = 0
@@ -95,14 +95,14 @@ export default class Alpha extends Component {
     }, 150)
 
     onMouseDown = () => {
-        console.log('alpha onMouseDown')
+        // console.log('alpha onMouseDown')
 
         document.body.addEventListener('mousemove', this.onMouseMove)
         document.body.addEventListener('mouseup', this.onMouseUp)
     }
 
     onMouseUp = () => {
-        console.log('alpha onMouseUp')
+        // console.log('alpha onMouseUp')
 
         document.body.removeEventListener('mousemove', this.onMouseMove)
         document.body.removeEventListener('mouseup', this.onMouseUp)
@@ -120,8 +120,8 @@ export default class Alpha extends Component {
         const {alpha} = this.props
         const alphaX = (squareSize * alpha) - barSize/2
 
-        console.log('alpha = ', alpha)
-        console.log('alphaX = ', alphaX)
+        // console.log('alpha = ', alpha)
+        // console.log('alphaX = ', alphaX)
 
         return (
             <div className="color-picker__alpha" ref={this.alpha}>

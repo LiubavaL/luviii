@@ -171,8 +171,8 @@ class ApiService {
         return null
     }
 
-    async deleteFaq(id){
-        return await this.deleteFaqs([id])
+    deleteFaq(id){
+        return this.deleteFaqs([id])
     }
 
     async deleteFaqs(ids){
@@ -197,8 +197,11 @@ class ApiService {
 
     //Socials
     async getSocials(){
-        const res = await fetch('/api/social')
-        // throw new Error('Error in service fetch getSocials')
+        const res = await fetch('/api/social', {
+            headers: {
+                ...this.getAuthHeader()
+            }
+        })
 
         if(res.status === 200) {
             const body = await res.json()
@@ -209,7 +212,6 @@ class ApiService {
             
             return parsedSocials
         }
-        
     }
 
     async addSocial(formData){
@@ -245,7 +247,11 @@ class ApiService {
         }
     }
 
-    async deleteSocial(id){
+    deleteSocial(id){
+        return this.deleteSocials([id])
+    }
+
+    async deleteSocials(ids){
         let res = await fetch(
             '/api/social/delete',
             {
@@ -254,13 +260,13 @@ class ApiService {
                     'Content-Type': 'application/json',
                     ...this.getAuthHeader()
                 },
-                body: JSON.stringify({id})
+                body: JSON.stringify({ids})
             })
 
         if(res.status === 200){
             res = await res.json()
 
-            return res.id
+            return res.ids
         }
 
         return null

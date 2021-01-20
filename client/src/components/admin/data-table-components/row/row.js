@@ -6,7 +6,7 @@ import Checkbox from '../../../checkbox'
 
 import './row.scss'
 
-const Row = ({id, data, selected, onSelect, onEdit, onDelete}) => {
+const Row = ({id, data, onEdit, onDelete}) => {
     /**
      * data = [
      *  {rowData, width},
@@ -14,14 +14,18 @@ const Row = ({id, data, selected, onSelect, onEdit, onDelete}) => {
      *  {rowData, width},
      * ]
      */
-    const renderData = (data) => {
-        return data.map(item => <TableData {...item} />)
+    const renderData = (rowData) => {
+        return rowData.map(({data, render, ...rest}) => {
+            return <TableData {...rest}>
+                {typeof render === 'function' ? render(data) : data}
+            </TableData>
+        })
     }
 
     const getClassNames = () => {
         let classNames = `mdc-data-table__row
-            ${selected ? 'mdc-data-table__row--selected' : ''}
         `
+        // ${selected ? 'mdc-data-table__row--selected' : ''}
         return classNames
     }
 
@@ -29,10 +33,11 @@ const Row = ({id, data, selected, onSelect, onEdit, onDelete}) => {
         <tr 
             data-row-id={id}
             className={getClassNames()}
-            aria-selected={selected ? "true" : ''}
+            // aria-selected={selected ? "true" : ''}
         >
-            <TableData 
-                data={<div class="mdc-checkbox mdc-data-table__row-checkbox">
+            
+            <TableData withCheckbox>
+                <div class="mdc-checkbox mdc-data-table__row-checkbox">
                     <input type="checkbox" class="mdc-checkbox__native-control" aria-labelledby="u1"/>
                     <div class="mdc-checkbox__background">
                         <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
@@ -42,10 +47,10 @@ const Row = ({id, data, selected, onSelect, onEdit, onDelete}) => {
                     </div>
                     <div class="mdc-checkbox__ripple"></div>
                 </div>
-            } 
-            withCheckbox
-            />
-            {/* <TableData 
+            </TableData>
+            {/* 
+            //to avoid double init use raw input checkbox
+            <TableData 
                 data={<Checkbox 
                     checked={selected} 
                     onChange={e => onSelect(e.target.checked, id)}
@@ -54,13 +59,13 @@ const Row = ({id, data, selected, onSelect, onEdit, onDelete}) => {
                 withCheckbox
              /> */}
             {renderData(data)}
-            <TableData 
-                data={<Actions 
+            <TableData>
+                <Actions 
                     id={id} 
                     onEdit={onEdit} 
                     onDelete={onDelete}
-                />} 
-            />
+                />
+            </TableData>
         </tr>
     )
 }

@@ -178,12 +178,13 @@ export default class Select extends Component {
     }
 
     getClassNames(){
-        const {disabled, label, outlined, icon, simple, theme, className} = this.props;
+        const {disabled, invalid, label, outlined, icon, simple, theme, className} = this.props;
 
         return `mdc-select ${className}
             ${simple ? ' mdc-select--simple' : ''}
             ${theme ? ` mdc-select--theme_${theme}` : ''}
             ${disabled ? ' mdc-select--disabled' : ''}
+            ${invalid ? ' mdc-select--invalid' : ''}
             ${label ? '' : ' mdc-select--no-label'}
             ${outlined ? ' mdc-select--outlined' : '  mdc-select--filled'}
             ${icon ? ' mdc-select--with-leading-icon' : ''}`

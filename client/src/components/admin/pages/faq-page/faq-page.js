@@ -71,8 +71,9 @@ export default class FaqPage extends Component {
     handleDelete = async (id) => {
         const resId = await apiService.deleteFaq(id)
 
-        if(resId){
+        if(resId === id){
             const updFaqs = this.state.faqs.filter(({_id}) => _id !== id)
+            
             this.setState({
                 faqs: updFaqs,
                 dialog: {
@@ -168,8 +169,9 @@ export default class FaqPage extends Component {
             data={faqs}
             selectedItems={selectedItems}
             onSelect={this.onSelect}
-            onEdit={this.onEditClick}
-            onDelete={this.onDeleteClick}
+            onSelectAll={this.onSelectAll}
+            onEdit={this.onEdit}
+            onDelete={this.onDelete}
         />
     }
 
@@ -282,7 +284,7 @@ export default class FaqPage extends Component {
         })
     }
 
-    onAddClick = () => {
+    onAdd = () => {
         this.setState({
             dialog: {
                 ...this.state.dialog,
@@ -292,7 +294,7 @@ export default class FaqPage extends Component {
         })
     }
 
-    onEditClick = (_id) => {
+    onEdit = (_id) => {
         this.setState({
             dialog: {
                 ...this.state.dialog,
@@ -303,7 +305,7 @@ export default class FaqPage extends Component {
         })
     }
 
-    onDeleteClick = (_id) => {
+    onDelete = (_id) => {
         this.setState({
             dialog: {
                 ...this.state.dialog,
@@ -314,7 +316,7 @@ export default class FaqPage extends Component {
         })
     }
 
-    onDeleteSelectedClick = () => {
+    onDeleteSelected = () => {
         this.setState({
             dialog: {
                 ...this.state.dialog,
@@ -342,6 +344,12 @@ export default class FaqPage extends Component {
         }
     }
 
+    onSelectAll = (selected) => {
+        this.setState({
+            selectedItems: selected ? this.state.faqs.map(({_id}) => _id) : []
+        })
+    }
+
     render(){
         const {faqs, dialog: {open, type}, selectedItems, loading, error} = this.state
 
@@ -357,9 +365,9 @@ export default class FaqPage extends Component {
             <div className="faq-page">
                 <Typography use="headline1">FAQ</Typography>
                 <div>
-                    <Button onClick={this.onAddClick} raised>Добавить</Button>
+                    <Button onClick={this.onAdd} raised>Добавить</Button>
                 </div>
-                {!!selectedItems.length && <Button onClick={this.onDeleteSelectedClick}>Удалить выделенные</Button>}
+                {!!selectedItems.length && <Button onClick={this.onDeleteSelected}>Удалить выделенные</Button>}
                 {this.renderFaqs(faqs, selectedItems)}
                 <Dialog open={open} onClosed={this.onModalClose}>
                     {this.renderModalByType(type)}

@@ -38,9 +38,8 @@ router.post('/edit', withAuth, async(req, res) => {
 router.post('/delete', withAuth, async(req, res) => {
     try {
         const {ids} = req.body
-        const r = await Faq.deleteMany(Faq.find({_id: ids}))
-        console.log('delete faqs by ids result: ', r)
-        // await Faq.findByIdAndDelete(id)
+
+        await Faq.deleteMany(Faq.find({_id: ids}))
         res.json({ids})
     } catch(e){
         res.status(500).json({message: e.message})

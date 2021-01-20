@@ -2,7 +2,8 @@
 
 .image-field {
     $hover-field: &;
-    
+
+    max-width: 100px;
     border-radius: 3px;
     
     &--empty {
@@ -103,6 +104,19 @@
 
         .icon {
             color: variables.$surface-color;
+        }
+    }
+
+    //Invalid
+    &--invalid {
+        border: 1px solid red;
+
+        & + .mdc-text-field-helper-line .mdc-text-field-helper-text--validation-msg {
+            opacity: 1;
+        }
+
+        & + .mdc-text-field-helper-line .mdc-text-field-helper-text--validation-msg {
+            color: red;
         }
     }
 }

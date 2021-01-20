@@ -7,10 +7,8 @@ const multerS3 = require('multer-s3')
 const s3 = require('../singletons/S3')
 const FileHelper = require('../helpers/FileHelper')
 const config = require('config')
-
 const bucket = config.get('s3.bucketName')
 const postBucket = `${bucket}/images`
-
 
 const upload = multer({
     storage: multerS3({
@@ -33,8 +31,6 @@ const upload = multer({
 router.get('/', withAuth, async(req, res) => {
     try {
         const socials = await Social.find()
-
-        // console.log('socials', socials)
 
         return res.json({socials})
     } catch(e){
@@ -89,21 +85,51 @@ router.post('/edit', [withAuth, upload.single('icon')], async(req, res) => {
 
 router.post('/delete', withAuth, async(req, res) => {
     try {
-        const {id} = req.body
-        const social = await Social.findById(id)
-        console.log('delete social id', id)
-        console.log('delete social ', social)
+        const {ids} = req.body
+        const query = Social.find({_id: ids})
+        const socials = await query
 
-        const param = {
-            Bucket: bucket,
-            Key: social.iconPath
+        let params = {
+            Bucket: bucket, 
+            Delete: {
+             Objects: [
+            //     {
+            //    Key: "HappyFace.jpg", 
+            //   }, 
+            //     {
+            //    Key: "HappyFace.jpg", 
+            //   }
+             ], 
+             Quiet: false
+            }
+           };
+
+        for (const social of socials){
+            params.Delete.Objects.push({
+                Key: social.iconPath
+            })
         }
-        console.log('social edit delete icon param = ', param)
+        const s3Result = await s3.deleteObjects(params).promise()
+        /*
+            data = {
+            Deleted: [
+            {
+            Key: "HappyFace.jpg", 
+            VersionId: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd"
+            }, 
+            {
+            Key: "HappyFace.jpg", 
+            VersionId: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b"
+            }
+            ]
+        }
+        */
+       if(s3Result.Deleted.length === params.Delete.Objects.length){
+           await Social.deleteMany(query)
 
-        await s3.deleteObject(param).promise()
-        await Social.findByIdAndDelete(id)
-
-        return res.status(200).json({id})
+           return res.json({ids})
+       }
+       throw new Error("Failed to delete images")
     } catch(e){
         res.status(500).json({e: e.message})
     }

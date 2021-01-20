@@ -67,6 +67,11 @@ OptionsAsMap.args = {
     }
 }
 
+export const Invalid = Template.bind({})
+Invalid.args = {
+    invalid: true
+}
+
 export const WithLevels = Template.bind({})
 WithLevels.args = {
     options: [

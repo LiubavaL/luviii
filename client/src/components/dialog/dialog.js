@@ -15,10 +15,15 @@ export class Dialog extends Component {
     }
 
     componentDidMount(){
-        const {onClosed} = this.props;
+        const {onClosed, onOpened} = this.props;
 
         this.mdcComponent = new MDCDialog(this.dialogRoot.current);
-        this.mdcComponent.listen('MDCDialog:closed', onClosed);
+        if(typeof onClosed === 'function'){
+            this.mdcComponent.listen('MDCDialog:closed', onClosed);
+        }
+        // if(typeof onOpened === 'function'){
+            this.mdcComponent.listen('MDCDialog:opened', () => this.mdcComponent.layout());
+        // }
         this.sync();
     }
 
@@ -36,6 +41,8 @@ export class Dialog extends Component {
     sync = () => {
         if(this.props.open){
             this.mdcComponent.open();
+            this.mdcComponent.layout();
+            
         } else {
             this.mdcComponent.close();
         }

@@ -10,7 +10,7 @@ const TableHeadData = ({label, sortable, width, columnId, sort, children, withCh
     const getClassNames = () => {
         return `mdc-data-table__header-cell 
             ${withCheckbox ? ' mdc-data-table__header-cell--checkbox' : '' }
-            ${sortable ?  ` mdc-data-table__header-cell--with-sort mdc-data-table__header-cell--numeric` : ''}
+            ${sortable ?  ` mdc-data-table__header-cell--with-sort` : ''}
             ${sortable && sort ?  ` mdc-data-table__header-cell--sorted` : ''}
         `
     }
@@ -23,7 +23,7 @@ const TableHeadData = ({label, sortable, width, columnId, sort, children, withCh
             scope="col"
             aria-sort="none"
             data-column-id={columnId}
-            style={{width}}
+            // style={{width}}
             >
                 <div class="mdc-data-table__header-cell-wrapper">
                     <div class="mdc-data-table__header-cell-label"> {data} </div>
@@ -36,7 +36,12 @@ const TableHeadData = ({label, sortable, width, columnId, sort, children, withCh
     }
 
     return (
-        <th className={getClassNames()} role="columnheader" scope="col">{data}</th>
+        <th 
+            className={getClassNames()} 
+            role="columnheader" 
+            scope="col">
+                {data}
+        </th>
     )
 }
 

@@ -4,8 +4,8 @@ import {HSLAToString} from '../../helpers/ColorHelper'
 
 import './social-link.scss';
 
-const SocialLink = ({to, bg, title, icon, jumping}) => {
-    const style= bg ? {backgroundColor: HSLAToString(bg)} : {}
+const SocialLink = ({url, color, title, icon, jumping}) => {
+    const style= color ? {backgroundColor: HSLAToString(color)} : {}
 
     const getClassNames = function(){
         return `social-link ${jumping ? 'social-link--jumping' : ''}`
@@ -13,7 +13,7 @@ const SocialLink = ({to, bg, title, icon, jumping}) => {
 
     return <a 
         className={getClassNames()}
-        href={to} 
+        href={url} 
         style={style}
         target="_blank"
     >

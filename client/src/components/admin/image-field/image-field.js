@@ -3,20 +3,34 @@ import React, { Component } from 'react'
 import Typography from '../../typography'
 import Icon from '../../icon'
 import IconButton from '../../icon-button'
+import HelperText from '../../helper-text'
 
 import './image-field.scss'
 
 export default class ImageField extends Component {
-    state = {
-        value: this.props.initialValue,
-        loading: !!this.props.initialLoading,
-        modified: !!this.props.initialModified
-    }
-
     constructor(props){
         super(props)
         this.dropArea = React.createRef()
-        this.hasInitialValue = this.props.initialValue
+        this.hasInitialValue = props.initialValue
+        this.state = {
+            value: props.initialValue,
+            loading: !!props.initialLoading,
+            modified: !!props.initialModified
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        const {value} = this.state
+        const {onChange} = this.props
+        console.log('componentDidUpdate=',prevState.value, value)
+
+        if(prevState.value !== value){
+            if(typeof onChange === 'function'){
+                console.log('image field onChange file=', value)
+
+                onChange(value)
+            }
+        }
     }
 
     revert = () => {
@@ -39,10 +53,6 @@ export default class ImageField extends Component {
             value: file,
             modified: !!this.hasInitialValue
         })
-
-        if(typeof this.props.onChange === 'function'){
-            this.props.onChange(file)
-        }
     }
 
     renderImage(){
@@ -85,13 +95,6 @@ export default class ImageField extends Component {
                             />
                         }
 
-                        {/* <label>
-                            {this.getFileInput()}
-                            <IconButton 
-                                icon="cloud_upload" 
-                            />
-                        </label> */}
-
                         <IconButton 
                             icon="cloud_upload" 
                             tag="label"
@@ -123,31 +126,6 @@ export default class ImageField extends Component {
         )
     }
 
-    // onDragEnter = (e) => {
-    //     e.preventDefault()
-    //     e.stopPropagation()
-    //     console.log('onDragEnter')
-    // }
-
-    // onDragLeave = (e) => {
-    //     e.preventDefault()
-    //     e.stopPropagation()
-    //     console.log('onDragLeave')
-    // }
-
-    // onDragOver = (e) => {
-    //     e.preventDefault()
-    //     e.stopPropagation()
-    //     console.log('onDragOver')
-    // }
-
-    // onDrop = (e) => {
-    //     e.preventDefault()
-    //     e.stopPropagation()
-    //     console.log('onDrop')
-    //     // this.dropArea.current.classList.remove('image-field--highlight')
-    // }
-
     onDragDrop = (e) => {
         e.preventDefault()
         e.stopPropagation()
@@ -171,32 +149,49 @@ export default class ImageField extends Component {
         }
     }
 
+    getClassNames(){
+        const {invalid} = this.props
+
+        return `image-field image-field--empty
+            ${invalid ? ' image-field--invalid' : ''}
+        `
+    }
+
     renderEmpty(){
+        const {invalid, helpText} = this.props
+
         return (
-            <div 
-                className="image-field image-field--empty"
-                onDragEnter={this.onDragDrop}
-                onDragLeave={this.onDragDrop}
-                onDragOver={this.onDragDrop}
-                onDrop={this.onDragDrop}
-                ref={this.dropArea}
-            >
-                <Icon 
-                    src="cloud_upload" 
-                    size="l"
-                    className="image-field__icon"
-                />
-                <Typography 
-                    use="subtitle2" 
-                    className="image-field__title">
-                        Перетащите файл
-                </Typography>
-                <p className="image-field__or">или</p>
-                <label className="image-field__label">
-                    Выберите
-                    {this.getFileInput()}
-                </label>
-            </div>
+            <>
+                <div 
+                    className={this.getClassNames()}
+                    onDragEnter={this.onDragDrop}
+                    onDragLeave={this.onDragDrop}
+                    onDragOver={this.onDragDrop}
+                    onDrop={this.onDragDrop}
+                    ref={this.dropArea}
+                >
+                    <Icon 
+                        src="cloud_upload" 
+                        size="l"
+                        className="image-field__icon"
+                    />
+                    <Typography 
+                        use="subtitle2" 
+                        className="image-field__title">
+                            Перетащите файл
+                    </Typography>
+                    <p className="image-field__or">или</p>
+                    <label className="image-field__label">
+                        Выберите
+                        {this.getFileInput()}
+                    </label>
+                </div>
+                <div className="mdc-text-field-helper-line">
+                    <HelperText invalid={invalid}>
+                            {helpText}
+                    </HelperText>
+                </div>
+            </>
         )
     }
 
